@@ -7,7 +7,13 @@ const finalMessage = document.getElementById('final-message');
 const playAgainBtn = document.getElementById('play-again');
 
 
-const words = ["wizard","application","interface","object"];
+const words = ['application',
+  'programming',
+  'interface',
+  'wizard',
+  'bunny',
+  'bottle',
+  'carnival',];
 
 let selectedWord = words[Math.floor(Math.random() * words.length)];
 
@@ -16,8 +22,10 @@ const wrongLetters = [];
 
 function displayWord() {
     wordEl.innerHTML = `
+    <span class="letter">${selectedWord[0]}</span>
     ${selectedWord
         .split('')
+        .splice(1)
         .map(
             letter =>  `<span class="letter">${correctLetters.includes(letter) ? letter : ''}</span>`
             ).join('')
@@ -28,6 +36,7 @@ function displayWord() {
         if (innerWord === selectedWord) {
             finalMessage.innerText = 'Congratulations! You won! 😃';
             popup.style.display = 'flex';
+            autoStart();
         }
 
 }
@@ -59,6 +68,7 @@ function updateWrongLettersEl() {
     if(wrongLetters.length === figureParts.length) {
         finalMessage.innerText = 'Unfortunately you lost. 😕';
         popup.style.display = 'flex';
+        autoStart();
     }
 
 }
@@ -102,6 +112,21 @@ playAgainBtn.addEventListener('click', () => {
     popup.style.display = 'none';
 
 });
+
+function autoStart() {
+  setTimeout(() => {
+    correctLetters.splice(0);
+    wrongLetters.splice(0);
+
+    selectedWord = words[Math.floor(Math.random() * words.length)];
+
+    displayWord();
+
+    updateWrongLettersEl();
+
+    popup.style.display = 'none';
+  }, 2000);
+}
 
 
 displayWord();
