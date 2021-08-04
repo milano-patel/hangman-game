@@ -1,6 +1,9 @@
 ## Hangman Game
 Select letters to figure out a hidden word in a set amount of chances, where the first letter and length of the word is given.
 
+## Live Preview
+https://milano-patel.github.io/hangman-game/
+
 ## Project Specifications
 - Display hangman pole and figure using SVG
 - Generate a random word
